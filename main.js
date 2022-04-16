@@ -3,149 +3,302 @@ var computerScore = 0;
 var personScore = 0;
 var person2Score = 0;
 var turn = 0; /*0 == computer turn, 1 = user turn*/
-var gameOn = 1; /*true is game going on*/
-var getDecision = 0;
+var gameOn = true; /*true is game going on*/
+var twoPlayers = false;
 
 let unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]; /*List of unused tiles, shrinks as game goes on*/
 var flags = [0, 0, 0, 0, 0, 0, 0, 0, 0]; /* open, not in use. 1 or 2 => in use cannot put xo in there*/
 
+const winConditions = [
+    [0, 1, 2], 
+    [3, 4, 5], 
+    [6, 7, 8], 
+    [0, 3, 6], 
+    [1, 4, 7], 
+    [2, 5, 8], 
+    [0, 4, 8], 
+    [2, 4, 6]
+];
+
 window.addEventListener('load', (event) => {
     console.log('page is fully loaded');
-    document.getElementById("newGame").addEventListener("click", newGame);
+
+    var newGameAI = document.getElementById("newGameAI");
+    newGameAI.addEventListener("click", newGame, false);
+    newGameAI.parameter = false;
+
+    var newGame2Players = document.getElementById("newGame2Players");
+    newGame2Players.addEventListener("click", newGame, false);
+    newGame2Players.parameter = true;
+
+    document.getElementById("reset").addEventListener("click", resetBoardLayout, false);
 })
 
-/* will choose where to place the x*/
-function getComputerDecision(){
-    let randomIndex = getRandomIntInclusive(0, unusedTiles.length - 1);
-    let computerChoice = unusedTiles[randomIndex];
-    return computerChoice;
-}
-
-function newGame(){
+function newGame(button){
     /*when clicked starts the game/new game*/
     resetBoardLayout();
-    unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    flags = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     turn = 0;
-    gameOn = 1;
-    getDecision = 0;
+    gameOn = true;
 
-    againstComputer();
-    
+    console.log("Started new game");
+
+    twoPlayers = button.currentTarget.parameter;
+
+    if (!twoPlayers) {
+        againstComputer();
+    }
+}
+
+function resetBoardLayout() {
+    if (!gameOn) {
+        unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        flags = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+        document.getElementById("one").innerHTML = "";
+        document.getElementById("two").innerHTML = "";
+        document.getElementById("three").innerHTML = "";
+        document.getElementById("four").innerHTML = "";
+        document.getElementById("five").innerHTML = "";
+        document.getElementById("six").innerHTML = "";
+        document.getElementById("seven").innerHTML = "";
+        document.getElementById("eight").innerHTML = "";
+        document.getElementById("nine").innerHTML = "";
+    }
 }
 
 function againstComputer(){
-    getDecision = getComputerDecision.call();
-    if(getDecision == 1)
-    {
-        one.call();
-    }else if(getDecision == 2)
-    {
-        two.call();
-    }else if(getDecision == 3)
-    {
-        three.call();
-    }else if(getDecision == 4)
-    {
-        four.call();
-    }else if(getDecision == 5)
-    {
-        five.call();
-    }else if(getDecision == 6)
-    {
-        six.call();
-    }else if(getDecision == 7)
-    {
-        seven.call();
-    }else if(getDecision == 8)
-    {
-        eight.call();
-    }else if(getDecision == 9)
-    {
-        nine.call();
+    if (!twoPlayers && gameOn) {
+        let randomIndex = getRandomIntInclusive(0, unusedTiles.length - 1);
+        let computerChoice = unusedTiles[randomIndex];
+
+        if(computerChoice == 1) {
+            one.call();
+        }
+        else if(computerChoice == 2) {
+            two.call();
+        }
+        else if(computerChoice == 3) {
+            three.call();
+        }
+        else if(computerChoice == 4) {
+            four.call();
+        }
+        else if(computerChoice == 5) {
+            five.call();
+        }
+        else if(computerChoice == 6) {
+            six.call();
+        }else if(computerChoice == 7)
+        {
+            seven.call();
+        }
+        else if(computerChoice == 8) {
+            eight.call();
+        }
+        else if(computerChoice == 9) {
+            nine.call();
+        }
+
+        turn = 1;
     }
-    turn = 1;
 }
 
 /*functions to write O for user*/
-function userOne(){
-    if(turn == 1)
-    {
-        one.call();
-        turn = 0;
-        againstComputer();
+function userOne() {
+    if (gameOn) {
+        if (twoPlayers) {
+            one.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                one.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userTwo(){
-    if(turn == 1)
-    {
-        two.call();
-        turn = 0;
-        againstComputer();
+function userTwo() {
+    if (gameOn) {
+        if (twoPlayers) {
+            two.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                two.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userThree(){
-    if(turn == 1)
-    {
-        three.call();
-        turn = 0;
-        againstComputer();
+function userThree() {
+    if (gameOn) {
+        if (twoPlayers) {
+            three.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                three.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userFour(){
-    if(turn == 1)
-    {
-        four.call();
-        turn = 0;
-        againstComputer();
+function userFour() {
+    if (gameOn) {
+        if (twoPlayers) {
+            four.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                four.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userFive(){
-    if(turn == 1)
-    {
-        five.call();
-        turn = 0;
-        againstComputer();
+function userFive() {
+    if (gameOn) {
+        if (twoPlayers) {
+            five.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                five.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userSix(){
-    if(turn == 1)
-    {
-        six.call();
-        turn = 0;
-        againstComputer();
+function userSix() {
+    if (gameOn) {
+        if (twoPlayers) {
+            six.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                six.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userSeven(){
-    if(turn == 1)
-    {
-        seven.call();
-        turn = 0;
-        againstComputer();
+function userSeven() {
+    if (gameOn) {
+        if (twoPlayers) {
+            seven.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                seven.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userEight(){
-    if(turn == 1)
-    {
-        eight.call();
-        turn = 0;
-        againstComputer();
+function userEight() {
+    if (gameOn) {
+        if (twoPlayers) {
+            eight.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                eight.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
-function userNine(){
-    if(turn == 1)
-    {
-        nine.call();
-        turn = 0;
-        againstComputer();
+function userNine() {
+    if (gameOn) {
+        if (twoPlayers) {
+            nine.call();
+    
+            if (turn == 0) {
+                turn = 1;
+            }
+            else {
+                turn = 0;
+            }
+        }
+        else {
+            if (turn == 1) {
+                nine.call();
+                turn = 0;
+                againstComputer();
+            }
+        }
     }
 }
 
@@ -162,7 +315,7 @@ function one(){
         }
 
         let index = unusedTiles.indexOf(1);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -178,7 +331,7 @@ function two(){
         }
 
         let index = unusedTiles.indexOf(2);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -194,7 +347,7 @@ function three(){
         }
 
         let index = unusedTiles.indexOf(3);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -210,7 +363,7 @@ function four(){
         }
 
         let index = unusedTiles.indexOf(4);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -226,7 +379,7 @@ function five(){
         }
 
         let index = unusedTiles.indexOf(5);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -242,7 +395,7 @@ function six(){
         }
 
         let index = unusedTiles.indexOf(6);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -258,7 +411,7 @@ function seven(){
         }
 
         let index = unusedTiles.indexOf(7);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -274,7 +427,7 @@ function eight(){
         }
 
         let index = unusedTiles.indexOf(8);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
@@ -290,56 +443,44 @@ function nine(){
         }
 
         let index = unusedTiles.indexOf(9);
-        checkBoard(index);
+        updateBoard(index);
     } 
 }
 
-function checkForWin() {
-    const winConditions = [
-        [0, 1, 2], 
-        [3, 4, 5], 
-        [6, 7, 8], 
-        [0, 3, 6], 
-        [1, 4, 7], 
-        [2, 5, 8], 
-        [0, 4, 8], 
-        [2, 4, 6]
-    ];
-
-    for (let i = 0; i < winConditions.length; i++) {
-        // console.log("Checking tiles " + winConditions[i][0] + ", " + winConditions[i][1] + ", and " + winConditions[i][2] + ". Their values are " + flags[winConditions[i][0]] + ", " + flags[winConditions[i][1]] + ", and " + flags[winConditions[i][2]] + ".");
-        if (flags[winConditions[i][0]] == flags[winConditions[i][1]] && flags[winConditions[i][1]] == flags[winConditions[i][2]] && flags[winConditions[i][1]] != 0) {
-            if (flags[winConditions[i][0]] == 2) {
-                console.log("player wins");
-            }
-            else {
-                console.log("cpu wins");
-            }
-
-            gameOn = 0;
-            break;
-        }
-    }
-}
-
-function checkBoard(index) {
-    console.log(flags);
+// Updates the list of unused tiles and checks for a win
+function updateBoard(index) {
     if (index != -1) {
         unusedTiles.splice(index, 1);
-        checkForWin();
+    
+        for (let i = 0; i < winConditions.length; i++) {
+            // console.log("Checking tiles " + winConditions[i][0] + ", " + winConditions[i][1] + ", and " + winConditions[i][2] + ". Their values are " + flags[winConditions[i][0]] + ", " + flags[winConditions[i][1]] + ", and " + flags[winConditions[i][2]] + ".");
+            if (flags[winConditions[i][0]] == flags[winConditions[i][1]] && flags[winConditions[i][1]] == flags[winConditions[i][2]] && flags[winConditions[i][1]] != 0) {
+                if (flags[winConditions[i][0]] == 2) {
+                    if (twoPlayers) {
+                        console.log("player 2 wins");
+                        person2Score += 1;
+                    }
+                    else {
+                        console.log("player wins");
+                        personScore += 1;
+                    }
+                }
+                else {
+                    if (twoPlayers) {
+                        console.log("player 1 wins");
+                        personScore += 1;
+                    }
+                    else {
+                        console.log("cpu wins");
+                        computerScore += 1;
+                    }
+                }
+    
+                gameOn = false;
+                break;
+            }
+        }
     }
-}
-
-function resetBoardLayout() {
-    document.getElementById("one").innerHTML = "";
-    document.getElementById("two").innerHTML = "";
-    document.getElementById("three").innerHTML = "";
-    document.getElementById("four").innerHTML = "";
-    document.getElementById("five").innerHTML = "";
-    document.getElementById("six").innerHTML = "";
-    document.getElementById("seven").innerHTML = "";
-    document.getElementById("eight").innerHTML = "";
-    document.getElementById("nine").innerHTML = "";
 }
 
 function getRandomIntInclusive(min, max) {
