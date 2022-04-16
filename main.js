@@ -34,19 +34,10 @@ window.addEventListener('load', (event) => {
     document.getElementById("reset").addEventListener("click", resetBoardLayout, false);
 })
 
-function newGame(button){
-    /*when clicked starts the game/new game*/
-    resetBoardLayout();
-    turn = 0;
-    gameOn = true;
-
-    console.log("Started new game");
-
-    twoPlayers = button.currentTarget.parameter;
-
-    if (!twoPlayers) {
-        againstComputer();
-    }
+function getRandomIntBetween(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
 function resetBoardLayout() {
@@ -66,9 +57,24 @@ function resetBoardLayout() {
     }
 }
 
+function newGame(button){
+    /*when clicked starts the game/new game*/
+    resetBoardLayout();
+    turn = 0;
+    gameOn = true;
+
+    console.log("Started new game");
+
+    twoPlayers = button.currentTarget.parameter;
+
+    if (!twoPlayers) {
+        againstComputer();
+    }
+}
+
 function againstComputer(){
     if (!twoPlayers && gameOn) {
-        let randomIndex = getRandomIntInclusive(0, unusedTiles.length - 1);
+        let randomIndex = getRandomIntBetween(0, unusedTiles.length - 1);
         let computerChoice = unusedTiles[randomIndex];
 
         if(computerChoice == 1) {
@@ -306,11 +312,11 @@ function userNine() {
 function one(){
     if (flags[0] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("one").innerHTML = "X";
+            document.getElementById("one").innerHTML = `<span class="xo">X</span>`;
             flags[0] = 1;
         }
         else {
-            document.getElementById("one").innerHTML = "O";
+            document.getElementById("one").innerHTML = `<span class="xo">O</span>`;
             flags[0] = 2;
         }
 
@@ -322,11 +328,11 @@ function one(){
 function two(){
     if (flags[1] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("two").innerHTML = "X";
+            document.getElementById("two").innerHTML = `<span class="xo">X</span>`;
             flags[1] = 1;
         }
         else {
-            document.getElementById("two").innerHTML = "O";
+            document.getElementById("two").innerHTML = `<span class="xo">O</span>`;
             flags[1] = 2;
         }
 
@@ -338,11 +344,11 @@ function two(){
 function three(){
     if (flags[2] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("three").innerHTML = "X";
+            document.getElementById("three").innerHTML = `<span class="xo">X</span>`;
             flags[2] = 1;
         }
         else {
-            document.getElementById("three").innerHTML = "O";
+            document.getElementById("three").innerHTML = `<span class="xo">O</span>`;
             flags[2] = 2;
         }
 
@@ -354,11 +360,11 @@ function three(){
 function four(){
     if (flags[3] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("four").innerHTML = "X";
+            document.getElementById("four").innerHTML = `<span class="xo">X</span>`;
             flags[3] = 1;
         }
         else {
-            document.getElementById("four").innerHTML = "O";
+            document.getElementById("four").innerHTML = `<span class="xo">O</span>`;
             flags[3] = 2;
         }
 
@@ -370,11 +376,11 @@ function four(){
 function five(){
     if (flags[4] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("five").innerHTML = "X";
+            document.getElementById("five").innerHTML = `<span class="xo">X</span>`;
             flags[4] = 1;
         }
         else {
-            document.getElementById("five").innerHTML = "O";
+            document.getElementById("five").innerHTML = `<span class="xo">O</span>`;
             flags[4] = 2;
         }
 
@@ -386,11 +392,11 @@ function five(){
 function six(){
     if (flags[5] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("six").innerHTML = "X";
+            document.getElementById("six").innerHTML = `<span class="xo">X</span>`;
             flags[5] = 1;
         }
         else {
-            document.getElementById("six").innerHTML = "O";
+            document.getElementById("six").innerHTML = `<span class="xo">O</span>`;
             flags[5] = 2;
         }
 
@@ -402,11 +408,11 @@ function six(){
 function seven(){
     if (flags[6] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("seven").innerHTML = "X";
+            document.getElementById("seven").innerHTML = `<span class="xo">X</span>`;
             flags[6] = 1;
         }
         else {
-            document.getElementById("seven").innerHTML = "O";
+            document.getElementById("seven").innerHTML = `<span class="xo">O</span>`;
             flags[6] = 2;
         }
 
@@ -418,11 +424,11 @@ function seven(){
 function eight(){
     if (flags[7] == 0 && gameOn == 1) {
         if (turn == 0) {
-            document.getElementById("eight").innerHTML = "X";
+            document.getElementById("eight").innerHTML = `<span class="xo">X</span>`;
             flags[7] = 1;
         }
         else {
-            document.getElementById("eight").innerHTML = "O";
+            document.getElementById("eight").innerHTML = `<span class="xo">O</span>`;
             flags[7] = 2;
         }
 
@@ -434,11 +440,11 @@ function eight(){
 function nine(){
     if (flags[8] == 0) {
         if (turn == 0) {
-            document.getElementById("nine").innerHTML = "X";
+            document.getElementById("nine").innerHTML = `<span class="xo">X</span>`;
             flags[8] = 1;
         }
         else {
-            document.getElementById("nine").innerHTML = "O";
+            document.getElementById("nine").innerHTML = `<span class="xo">O</span>`;
             flags[8] = 2;
         }
 
@@ -453,7 +459,6 @@ function updateBoard(index) {
         unusedTiles.splice(index, 1);
     
         for (let i = 0; i < winConditions.length; i++) {
-            // console.log("Checking tiles " + winConditions[i][0] + ", " + winConditions[i][1] + ", and " + winConditions[i][2] + ". Their values are " + flags[winConditions[i][0]] + ", " + flags[winConditions[i][1]] + ", and " + flags[winConditions[i][2]] + ".");
             if (flags[winConditions[i][0]] == flags[winConditions[i][1]] && flags[winConditions[i][1]] == flags[winConditions[i][2]] && flags[winConditions[i][1]] != 0) {
                 if (flags[winConditions[i][0]] == 2) {
                     if (twoPlayers) {
@@ -481,10 +486,4 @@ function updateBoard(index) {
             }
         }
     }
-}
-
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
