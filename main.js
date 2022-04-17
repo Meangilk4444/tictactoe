@@ -146,9 +146,11 @@ function userOne() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -169,9 +171,11 @@ function userTwo() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -192,9 +196,11 @@ function userThree() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -215,9 +221,11 @@ function userFour() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -238,9 +246,11 @@ function userFive() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -261,9 +271,11 @@ function userSix() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -284,9 +296,11 @@ function userSeven() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -307,9 +321,11 @@ function userEight() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
@@ -330,9 +346,11 @@ function userNine() {
     
             if (turn == 0) {
                 turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
             }
             else {
                 turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
             }
         }
         else {
