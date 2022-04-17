@@ -69,32 +69,45 @@ function newGame(button){
     console.log("Started new game");
 
     twoPlayers = button.currentTarget.parameter;
-    document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
+    
     if (!twoPlayers) {
         againstComputer();
     }
     else{
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
         timer = setInterval(makeAlert, 5000);
     }
 
 }
 
 function makeAlert(){ 
-    document.getElementById("timer-alert").innerHTML = "timer ran out";
-    if (turn == 0) {
-        turn = 1;
-        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+    if(twoPlayers) {
+        document.getElementById("timer-alert").innerHTML = "timer ran out";
+        if (turn == 0) {
+            turn = 1;
+            document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+        }
+        else {
+            turn = 0;
+            document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+        }
+        resetTimer();
     }
-    else {
-        turn = 0;
-        document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+    else{
+        if (turn == 0) {
+            turn = 1;
+            resetTimer();
+        }
+        else {
+            turn = 0;
+            clearInterval(timer);
+            againstComputer();
+        }
     }
-    resetTimer();
-    
-};
+}
 
 function resetTimer(){
-    clearInterval(timer);
+    
     document.getElementById("timer-alert").innerHTML = "";
     if(gameOn)
     {
@@ -105,6 +118,7 @@ function resetTimer(){
 
 function againstComputer(){
     if (!twoPlayers && gameOn) {
+        timer = setInterval(makeAlert, 5000);
         let randomIndex = getRandomIntBetween(0, unusedTiles.length - 1);
         let computerChoice = unusedTiles[randomIndex];
 
