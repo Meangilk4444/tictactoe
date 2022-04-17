@@ -90,11 +90,16 @@ function makeAlert(){
         document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
     }
     resetTimer();
+    
 };
 
 function resetTimer(){
     clearInterval(timer);
     document.getElementById("timer-alert").innerHTML = "";
+    if(gameOn)
+    {
+        timer = setInterval(makeAlert, 5000);
+    }
     
 }
 
@@ -141,7 +146,7 @@ function againstComputer(){
 function userOne() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             one.call();
     
             if (turn == 0) {
@@ -166,7 +171,7 @@ function userOne() {
 function userTwo() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             two.call();
     
             if (turn == 0) {
@@ -191,7 +196,7 @@ function userTwo() {
 function userThree() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             three.call();
     
             if (turn == 0) {
@@ -216,7 +221,7 @@ function userThree() {
 function userFour() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             four.call();
     
             if (turn == 0) {
@@ -241,7 +246,7 @@ function userFour() {
 function userFive() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             five.call();
     
             if (turn == 0) {
@@ -266,7 +271,7 @@ function userFive() {
 function userSix() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             six.call();
     
             if (turn == 0) {
@@ -291,7 +296,7 @@ function userSix() {
 function userSeven() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             seven.call();
     
             if (turn == 0) {
@@ -316,7 +321,7 @@ function userSeven() {
 function userEight() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             eight.call();
     
             if (turn == 0) {
@@ -341,7 +346,7 @@ function userEight() {
 function userNine() {
     if (gameOn) {
         if (twoPlayers) {
-            timer = setInterval(makeAlert, 5000);
+            resetTimer();
             nine.call();
     
             if (turn == 0) {
