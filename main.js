@@ -6,6 +6,7 @@ var turn = 0; /*0 == computer turn, 1 = user turn*/
 var gameOn = true; /*true is game going on*/
 var twoPlayers = false;
 
+
 let unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]; /*List of unused tiles, shrinks as game goes on*/
 var flags = [0, 0, 0, 0, 0, 0, 0, 0, 0]; /* open, not in use. 1 or 2 => in use cannot put xo in there*/
 
@@ -32,6 +33,8 @@ window.addEventListener('load', (event) => {
     newGame2Players.parameter = true;
 
     document.getElementById("reset").addEventListener("click", resetBoardLayout, false);
+
+
 })
 
 function getRandomIntBetween(min, max) {
@@ -40,7 +43,7 @@ function getRandomIntBetween(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
-function resetBoardLayout() {
+function resetBoardLayout() { 
     if (!gameOn) {
         unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         flags = [0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -66,10 +69,33 @@ function newGame(button){
     console.log("Started new game");
 
     twoPlayers = button.currentTarget.parameter;
-
+    document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
     if (!twoPlayers) {
         againstComputer();
     }
+    else{
+        timer = setInterval(makeAlert, 5000);
+    }
+
+}
+
+function makeAlert(){ 
+    document.getElementById("timer-alert").innerHTML = "timer ran out";
+    if (turn == 0) {
+        turn = 1;
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+    }
+    else {
+        turn = 0;
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+    }
+    resetTimer();
+};
+
+function resetTimer(){
+    clearInterval(timer);
+    document.getElementById("timer-alert").innerHTML = "";
+    
 }
 
 function againstComputer(){
@@ -106,13 +132,16 @@ function againstComputer(){
         }
 
         turn = 1;
+
     }
 }
+
 
 /*functions to write O for user*/
 function userOne() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             one.call();
     
             if (turn == 0) {
@@ -135,6 +164,7 @@ function userOne() {
 function userTwo() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             two.call();
     
             if (turn == 0) {
@@ -157,6 +187,7 @@ function userTwo() {
 function userThree() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             three.call();
     
             if (turn == 0) {
@@ -179,6 +210,7 @@ function userThree() {
 function userFour() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             four.call();
     
             if (turn == 0) {
@@ -201,6 +233,7 @@ function userFour() {
 function userFive() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             five.call();
     
             if (turn == 0) {
@@ -223,6 +256,7 @@ function userFive() {
 function userSix() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             six.call();
     
             if (turn == 0) {
@@ -245,6 +279,7 @@ function userSix() {
 function userSeven() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             seven.call();
     
             if (turn == 0) {
@@ -267,6 +302,7 @@ function userSeven() {
 function userEight() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             eight.call();
     
             if (turn == 0) {
@@ -289,6 +325,7 @@ function userEight() {
 function userNine() {
     if (gameOn) {
         if (twoPlayers) {
+            timer = setInterval(makeAlert, 5000);
             nine.call();
     
             if (turn == 0) {
