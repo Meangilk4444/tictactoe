@@ -5,7 +5,7 @@ var person2Score = 0;
 var turn = 0; /*0 == computer turn, 1 = user turn*/
 var gameOn = true; /*true is game going on*/
 var twoPlayers = false;
-
+var timer;
 
 let unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]; /*List of unused tiles, shrinks as game goes on*/
 var flags = [0, 0, 0, 0, 0, 0, 0, 0, 0]; /* open, not in use. 1 or 2 => in use cannot put xo in there*/
@@ -100,14 +100,14 @@ function makeAlert(){
         }
         else {
             turn = 0;
-            clearInterval(timer);
+            resetTimer();
             againstComputer();
         }
     }
 }
 
 function resetTimer(){
-    
+    clearInterval(timer);
     document.getElementById("timer-alert").innerHTML = "";
     if(gameOn)
     {
@@ -118,6 +118,7 @@ function resetTimer(){
 
 function againstComputer(){
     if (!twoPlayers && gameOn) {
+        clearInterval(timer);
         timer = setInterval(makeAlert, 5000);
         let randomIndex = getRandomIntBetween(0, unusedTiles.length - 1);
         let computerChoice = unusedTiles[randomIndex];
