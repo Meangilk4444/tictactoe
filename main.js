@@ -6,6 +6,9 @@ var turn = 0; /*0 == computer turn, 1 = user turn*/
 var gameOn = true; /*true is game going on*/
 var twoPlayers = false;
 var timer;
+var secondsRemaining = 4;
+var firstComputerMove = true;
+
 
 let unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]; /*List of unused tiles, shrinks as game goes on*/
 var flags = [0, 0, 0, 0, 0, 0, 0, 0, 0]; /* open, not in use. 1 or 2 => in use cannot put xo in there*/
@@ -33,8 +36,6 @@ window.addEventListener('load', (event) => {
     newGame2Players.parameter = true;
 
     document.getElementById("reset").addEventListener("click", resetBoardLayout, false);
-
-
 })
 
 function getRandomIntBetween(min, max) {
@@ -65,6 +66,8 @@ function newGame(button){
     resetBoardLayout();
     turn = 0;
     gameOn = true;
+    secondsRemaining = 4;
+    firstComputerMove = true;
 
     console.log("Started new game");
 
@@ -76,44 +79,57 @@ function newGame(button){
     else{
         document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
         timer = setInterval(makeAlert, 5000);
+        countdownTimer = setInterval(onScreenTimer, 1000);
     }
 
 }
 
-function makeAlert(){ 
-    if(twoPlayers) {
-        document.getElementById("timer-alert").innerHTML = "timer ran out";
-        if (turn == 0) {
-            turn = 1;
-            document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+function onScreenTimer() {
+    if (gameOn) {
+        document.getElementById("timer-alert").innerHTML = "Seconds remaining: " + secondsRemaining;
+        secondsRemaining -= 1;
+
+        if (secondsRemaining <= 0) {
+            secondsRemaining = 5;
         }
-        else {
-            turn = 0;
-            document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
-        }
-        resetTimer();
     }
-    else{
-        if (turn == 0) {
-            turn = 1;
+    else {
+        document.getElementById("timer-alert").innerHTML = "Seconds remaining: 5";
+    }
+}
+
+function makeAlert(){ 
+    if (gameOn) {
+        if(twoPlayers) {
+            if (turn == 0) {
+                turn = 1;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+            }
+            else {
+                turn = 0;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+            }
             resetTimer();
         }
-        else {
-            turn = 0;
-            resetTimer();
-            againstComputer();
+        else{
+            if (turn == 0) {
+                turn = 1;
+                resetTimer();
+            }
+            else {
+                turn = 0;
+                clearInterval(timer);
+                againstComputer();
+            }
         }
     }
 }
 
 function resetTimer(){
-    clearInterval(timer);
-    document.getElementById("timer-alert").innerHTML = "";
     if(gameOn)
     {
         timer = setInterval(makeAlert, 5000);
     }
-    
 }
 
 function againstComputer(){
@@ -153,6 +169,14 @@ function againstComputer(){
 
         turn = 1;
 
+        if (firstComputerMove) {
+            countdownTimer = setInterval(onScreenTimer, 1000);
+            firstComputerMove = false;
+        }
+        else {
+            console.log("computer_reset")
+            secondsRemaining = 5;
+        }
     }
 }
 
@@ -162,6 +186,7 @@ function userOne() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             one.call();
     
             if (turn == 0) {
@@ -187,6 +212,7 @@ function userTwo() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             two.call();
     
             if (turn == 0) {
@@ -212,6 +238,7 @@ function userThree() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             three.call();
     
             if (turn == 0) {
@@ -237,6 +264,7 @@ function userFour() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             four.call();
     
             if (turn == 0) {
@@ -262,6 +290,7 @@ function userFive() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             five.call();
     
             if (turn == 0) {
@@ -287,6 +316,7 @@ function userSix() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             six.call();
     
             if (turn == 0) {
@@ -312,6 +342,7 @@ function userSeven() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             seven.call();
     
             if (turn == 0) {
@@ -337,6 +368,7 @@ function userEight() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             eight.call();
     
             if (turn == 0) {
@@ -362,6 +394,7 @@ function userNine() {
     if (gameOn) {
         if (twoPlayers) {
             resetTimer();
+            secondsRemaining = 5;
             nine.call();
     
             if (turn == 0) {
