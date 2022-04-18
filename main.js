@@ -189,7 +189,7 @@ function againstComputer(){
 
 /*functions to write O for user*/
 function userOne() {
-    if (gameOn) {
+    if (gameOn && flags[0] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -215,7 +215,7 @@ function userOne() {
 }
 
 function userTwo() {
-    if (gameOn) {
+    if (gameOn && flags[1] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -241,7 +241,7 @@ function userTwo() {
 }
 
 function userThree() {
-    if (gameOn) {
+    if (gameOn && flags[2] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -267,7 +267,7 @@ function userThree() {
 }
 
 function userFour() {
-    if (gameOn) {
+    if (gameOn && flags[3] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -293,7 +293,7 @@ function userFour() {
 }
 
 function userFive() {
-    if (gameOn) {
+    if (gameOn && flags[4] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -319,7 +319,7 @@ function userFive() {
 }
 
 function userSix() {
-    if (gameOn) {
+    if (gameOn && flags[5] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -345,7 +345,7 @@ function userSix() {
 }
 
 function userSeven() {
-    if (gameOn) {
+    if (gameOn && flags[6] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -371,7 +371,7 @@ function userSeven() {
 }
 
 function userEight() {
-    if (gameOn) {
+    if (gameOn && flags[7] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
@@ -397,7 +397,7 @@ function userEight() {
 }
 
 function userNine() {
-    if (gameOn) {
+    if (gameOn && flags[8] == 0) {
         if (twoPlayers) {
             
             secondsRemaining = 10;
