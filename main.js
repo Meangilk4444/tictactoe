@@ -34,13 +34,13 @@ window.addEventListener('load', (event) => {
     newGame2Players.addEventListener("click", newGame, false);
     newGame2Players.parameter = true;
 
-    document.getElementById("reset").addEventListener("click", resetBoardLayout, false);
+    document.getElementById("reset").addEventListener("click", resetAll, false);
 })
 
 function getRandomIntBetween(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 function resetBoardLayout() { 
@@ -63,6 +63,17 @@ function resetBoardLayout() {
     }
 }
 
+function resetScores() {
+    xScore = 0;
+    oScore = 0;
+    document.getElementById("scores").innerHTML = `<span class="display_player">X: ${xScore} | O: ${oScore}</span>`;
+}
+
+function resetAll() {
+    resetBoardLayout();
+    resetScores();
+}
+
 function newGame(button){
     /*when clicked starts the game/new game*/
     if (!gameOn) {
@@ -73,7 +84,7 @@ function newGame(button){
         firstComputerMove = true;
 
         console.log("Started new game");
-        document.getElementById("timer-alert").innerHTML = "Seconds remaining: 5";
+        document.getElementById("timer-alert").innerHTML = "Seconds to make a move: 5";
 
         twoPlayers = button.currentTarget.parameter;
         
@@ -90,7 +101,7 @@ function newGame(button){
 function timerFunction() {
     if (gameOn) {
         if ((secondsRemaining / 2) % 1 == 0) {
-            document.getElementById("timer-alert").innerHTML = "Seconds remaining: " + (secondsRemaining / 2);
+            document.getElementById("timer-alert").innerHTML = "Seconds to make a move: " + (secondsRemaining / 2);
         }
 
         secondsRemaining -= 1;
