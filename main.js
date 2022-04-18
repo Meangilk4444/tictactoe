@@ -3,7 +3,7 @@ var computerScore = 0;
 var personScore = 0;
 var person2Score = 0;
 var turn = 0; /*0 == computer turn, 1 = user turn*/
-var gameOn = true; /*true is game going on*/
+var gameOn = false; /*true is game going on*/
 var twoPlayers = false;
 var timer;
 var secondsRemaining = 4;
@@ -63,25 +63,26 @@ function resetBoardLayout() {
 
 function newGame(button){
     /*when clicked starts the game/new game*/
-    resetBoardLayout();
-    turn = 0;
-    gameOn = true;
-    secondsRemaining = 4;
-    firstComputerMove = true;
+    if (!gameOn) {
+        resetBoardLayout();
+        turn = 0;
+        gameOn = true;
+        secondsRemaining = 4;
+        firstComputerMove = true;
 
-    console.log("Started new game");
+        console.log("Started new game");
 
-    twoPlayers = button.currentTarget.parameter;
-    
-    if (!twoPlayers) {
-        againstComputer();
+        twoPlayers = button.currentTarget.parameter;
+        
+        if (!twoPlayers) {
+            againstComputer();
+        }
+        else{
+            document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
+            timer = setInterval(makeAlert, 5000);
+            countdownTimer = setInterval(onScreenTimer, 1000);
+        }
     }
-    else{
-        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
-        timer = setInterval(makeAlert, 5000);
-        countdownTimer = setInterval(onScreenTimer, 1000);
-    }
-
 }
 
 function onScreenTimer() {
@@ -94,7 +95,7 @@ function onScreenTimer() {
         }
     }
     else {
-        document.getElementById("timer-alert").innerHTML = "Seconds remaining: 5";
+        document.getElementById("timer-alert").innerHTML = "";
     }
 }
 
@@ -174,7 +175,6 @@ function againstComputer(){
             firstComputerMove = false;
         }
         else {
-            console.log("computer_reset")
             secondsRemaining = 5;
         }
     }
@@ -570,26 +570,35 @@ function updateBoard(index) {
             if (flags[winConditions[i][0]] == flags[winConditions[i][1]] && flags[winConditions[i][1]] == flags[winConditions[i][2]] && flags[winConditions[i][1]] != 0) {
                 if (flags[winConditions[i][0]] == 2) {
                     if (twoPlayers) {
-                        console.log("player 2 wins");
+                        alert("Player 2 wins!");
                         person2Score += 1;
                     }
                     else {
-                        console.log("player wins");
+                        alert("You win!");
                         personScore += 1;
                     }
                 }
                 else {
                     if (twoPlayers) {
-                        console.log("player 1 wins");
+                        alert("Player 1 wins!");
                         personScore += 1;
                     }
                     else {
-                        console.log("cpu wins");
+                        alert("The AI wins!");
                         computerScore += 1;
                     }
                 }
     
                 gameOn = false;
+                clearInterval(countdownTimer);
+                clearInterval(timer);
+                break;
+            }
+            else if (unusedTiles.length <= 0) {
+                alert("It's a draw!");
+                gameOn = false;
+                clearInterval(countdownTimer);
+                clearInterval(timer);
                 break;
             }
         }
