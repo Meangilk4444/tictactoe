@@ -48,6 +48,9 @@ function resetBoardLayout() {
         unusedTiles = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         flags = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
+        document.getElementById("timer-alert").innerHTML = "";
+
         document.getElementById("one").innerHTML = "";
         document.getElementById("two").innerHTML = "";
         document.getElementById("three").innerHTML = "";
@@ -70,6 +73,7 @@ function newGame(button){
         firstComputerMove = true;
 
         console.log("Started new game");
+        document.getElementById("timer-alert").innerHTML = "Seconds remaining: 5";
 
         twoPlayers = button.currentTarget.parameter;
         
@@ -78,12 +82,12 @@ function newGame(button){
         }
         else{
             document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
-            timer = setInterval(onScreenTimer, 500);
+            timer = setInterval(timerFunction, 500);
         }
     }
 }
 
-function onScreenTimer() {
+function timerFunction() {
     if (gameOn) {
         if ((secondsRemaining / 2) % 1 == 0) {
             document.getElementById("timer-alert").innerHTML = "Seconds remaining: " + (secondsRemaining / 2);
@@ -114,10 +118,12 @@ function onScreenTimer() {
             }
             else {
                 document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
+                document.getElementById("timer-alert").innerHTML = "";
             }
         }
     }
     else {
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
         document.getElementById("timer-alert").innerHTML = "";
     }
 }
@@ -158,7 +164,7 @@ function againstComputer(){
         turn = 1;
 
         if (firstComputerMove) {
-            timer = setInterval(onScreenTimer, 500);
+            timer = setInterval(timerFunction, 500);
             firstComputerMove = false;
         }
         else {
@@ -566,18 +572,14 @@ function updateBoard(index) {
                     xScore += 1;
                 }
 
-                console.log(xScore);
-                console.log(oScore);
-
                 document.getElementById("scores").innerHTML = `<span class="display_player">X: ${xScore} | O: ${oScore}</span>`;
     
                 gameOn = false;
 
-                clearInterval(timer);
-
                 document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
                 document.getElementById("timer-alert").innerHTML = "";
 
+                clearInterval(timer);
                 break;
             }
             else if (unusedTiles.length <= 0) {
@@ -585,11 +587,10 @@ function updateBoard(index) {
 
                 gameOn = false;
 
-                clearInterval(timer);
-
                 document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
                 document.getElementById("timer-alert").innerHTML = "";
 
+                clearInterval(timer);
                 break;
             }
         }
