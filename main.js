@@ -1,7 +1,6 @@
 /*global variable*/
-var computerScore = 0;
-var personScore = 0;
-var person2Score = 0;
+var xScore = 0;
+var oScore = 0;
 var turn = 0; /*0 == computer turn, 1 = user turn*/
 var gameOn = false; /*true is game going on*/
 var twoPlayers = false;
@@ -78,7 +77,7 @@ function newGame(button){
             againstComputer();
         }
         else{
-            document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 1</span>`;
+            document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             timer = setInterval(makeAlert, 5000);
             countdownTimer = setInterval(onScreenTimer, 500);
         }
@@ -112,11 +111,11 @@ function makeAlert(){
         if(twoPlayers) {
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
             resetTimer();
         }
@@ -134,6 +133,7 @@ function againstComputer(){
     if (!twoPlayers && gameOn) {
         let randomIndex = getRandomIntBetween(0, unusedTiles.length - 1);
         let computerChoice = unusedTiles[randomIndex];
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
 
         if(computerChoice == 1) {
             one.call();
@@ -172,6 +172,8 @@ function againstComputer(){
         else {
             secondsRemaining = 10;
         }
+
+        document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
     }
 }
 
@@ -186,11 +188,11 @@ function userOne() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -212,11 +214,11 @@ function userTwo() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -238,11 +240,11 @@ function userThree() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -264,11 +266,11 @@ function userFour() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -290,11 +292,11 @@ function userFive() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -316,11 +318,11 @@ function userSix() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -342,11 +344,11 @@ function userSeven() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -368,11 +370,11 @@ function userEight() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -394,11 +396,11 @@ function userNine() {
     
             if (turn == 0) {
                 turn = 1;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Player 2</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, O.</span>`;
             }
             else {
                 turn = 0;
-                document.getElementById("whosTurn").innerHTML = `<span class="display_player"> Player 1</span>`;
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Your turn, X.</span>`;
             }
         }
         else {
@@ -564,36 +566,38 @@ function updateBoard(index) {
         for (let i = 0; i < winConditions.length; i++) {
             if (flags[winConditions[i][0]] == flags[winConditions[i][1]] && flags[winConditions[i][1]] == flags[winConditions[i][2]] && flags[winConditions[i][1]] != 0) {
                 if (flags[winConditions[i][0]] == 2) {
-                    if (twoPlayers) {
-                        alert("Player 2 wins!");
-                        person2Score += 1;
-                    }
-                    else {
-                        alert("You win!");
-                        personScore += 1;
-                    }
+                    alert("O wins!");
+                    oScore += 1;
                 }
                 else {
-                    if (twoPlayers) {
-                        alert("Player 1 wins!");
-                        personScore += 1;
-                    }
-                    else {
-                        alert("The AI wins!");
-                        computerScore += 1;
-                    }
+                    alert("X wins!");
+                    xScore += 1;
                 }
+
+                console.log(xScore);
+                console.log(oScore);
+
+                document.getElementById("scores").innerHTML = `<span class="display_player">X: ${xScore} | O: ${oScore}</span>`;
     
                 gameOn = false;
+
                 clearInterval(countdownTimer);
                 clearInterval(timer);
+
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
+                document.getElementById("timer-alert").innerHTML = "";
                 break;
             }
             else if (unusedTiles.length <= 0) {
                 alert("It's a draw!");
+
                 gameOn = false;
+
                 clearInterval(countdownTimer);
                 clearInterval(timer);
+
+                document.getElementById("whosTurn").innerHTML = `<span class="display_player">Click on a button below to start a game.</span>`;
+                document.getElementById("timer-alert").innerHTML = "";
                 break;
             }
         }
